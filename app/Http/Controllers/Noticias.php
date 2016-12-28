@@ -93,7 +93,15 @@ class Noticias extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        //dd('Holas');
+        
+        $noticia = Noticia::find($id);
+        
+    
+        return view('home')->with(['edit'=>true, 'noticia'=>$noticia]);
+        
+        
     }
 
     /**
