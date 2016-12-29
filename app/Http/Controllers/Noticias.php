@@ -20,6 +20,21 @@ class Noticias extends Controller
         //
     }
 
+    
+      /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function mostrar()
+    {
+      
+        $noticias=Noticia::all();
+       return view('welcome')->with(['noticias' => $noticias]);
+    }
+    
+    
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -54,6 +69,7 @@ class Noticias extends Controller
         $img = $request->file('urlImg');
         $file_route=time().'_'.$img->getClientOriginalName();
         
+         //Guarda  img
         Storage::disk('imgNoticias')->put($file_route,file_get_contents($img->getRealPath()));
         
         $noticia->urlImg=$file_route;
@@ -114,6 +130,38 @@ class Noticias extends Controller
     public function update(Request $request, $id)
     {
         //
+         $this->validate($request, [
+            'titulo'=>'required',
+            'descripcion' => 'required'
+            
+        ]);
+        
+        $noticia = Noticia::find($id);
+        $noticia -> titulo = $request->titulo;
+        $noticia -> descripcion = $request -> descripcion;
+        
+        $img = $request->file('urlImg');
+        $file_route=time().'_'.$img->getClientOriginalName();
+        $noticia->urlImg=$file_route;
+        
+        //Guarda nueva img
+        Storage::disk('imgNoticias')->put($file_route,file_get_contents($img->getRealPath()));
+
+        // Eliminar img anterior
+        Storage::disk('imgNoticias')->delete($request->imgDelete);
+        
+        
+        
+        
+        
+        if ($noticia->save()){
+            
+            return redirect('home');
+            
+        }else{
+            
+            return back()->with('msjerror','Error al guardar los datos'); 
+        }
     }
 
     /**
@@ -125,5 +173,7 @@ class Noticias extends Controller
     public function destroy($id)
     {
         //
+        Noticia::destroy($id);
+        return back();
     }
 }

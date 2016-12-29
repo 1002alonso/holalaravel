@@ -11,6 +11,12 @@
 <form  role="form" method="post" action="{{route('noticias.update',$noticia->id)}}" enctype="multipart/form-data">
     <input name="_method" type="hidden" value="PUT">
     
+    <!-- Cargar la ruta de la img guardada-->
+    
+    <input class="hide" type="text" name="imgDelete"value="{{$noticia->urlImg}}">
+    
+    
+    
     {{csrf_field()}}
   <div class="form-group">
     <label for="titulo">Titulo</label>

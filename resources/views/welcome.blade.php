@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="../public/css/app.css"rel=" stylesheet" type="text/css">
 
         <title>Laravel</title>
 
@@ -77,19 +79,43 @@
                 </div>
             @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+            <div class="panel-body">
+            <div class="container">
+                <h1>Noticias</h1>
+            
+                <div class="row">
+                       @if(isset($noticias))
+                    @foreach( $noticias as $n)
+                  
+                        <div class="col-xs-12 col-sm-6">
+                       
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                     <h3 class="panel-title">{{$n->titulo}}</h3>
+                                </div>
+                                
+                                <div class="panel-body">
+                                   
+                                    <img class="img img-responsive" style="max-width:200px;" src="imgNoticias/{{$n->urlImg}}">
+                                         <p>{{$n->descripcion}}</p>
+                                </div>
+                                <div class="panel-footer">Panel footer</div>
+                            </div>
+                        </div>
+                
+                    @endforeach
+                 @endif
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                    
+                
             </div>
+
+           
+     
+           
+                
+      
+        </div>
         </div>
     </body>
 </html>

@@ -30,10 +30,20 @@
           <img src="imgNoticias/{{$n->urlImg}}" class="img-responsive" alt="Responsive image" style="max-width:100px;">
         </td>
             
-        <th>
+       
+        <td>    
          <a href="noticias/{{$n->id}}/edit" class="btn btn-warning">Modificar</a>
-         <a href="" class="btn btn-danger">Eliminar</a>
-        </th>
+       
+        <form action="{{route('noticias.destroy',$n->id)}}" method="POST">
+                     <input name="_method" type="hidden" value="DELETE">
+                {{csrf_field()}}
+            <input type="submit" class="btn btn-danger btn-xs" value="Eliminar"></input>
+               
+        </form>  
+            
+       </td>
+     
+       
         </tr>
      @endforeach
     </tbody>

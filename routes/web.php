@@ -11,9 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Ruta por defecto
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+//Ruta por defecto con controlador
+Route::get('/', 'Noticias@mostrar');
+
 
 Auth::routes();
 
